@@ -17,6 +17,7 @@ Response:
     
 """
 
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -53,6 +54,19 @@ class Register_response_serializer(serializers.Serializer):
     def create(self, validated_data):
         return Register_response_type(**validated_data)    
 
+def create_new_user(name, username, email, password):
+    
+    try:
+        user = User.objects.create_user(username = username
+                                    , password = password
+                                    , email = email
+                                    , first_name = name)
+    except:
+        user = None
+    
+    return user
+    
+
 @api_view(['POST'])
 def register(request):
     
@@ -66,17 +80,24 @@ def register(request):
         password = request_object.password
         email = request_object.email
         
+        registration_status = False
+           
         if len(password) < 8:
-            result_msg  = "Bad Password"
-        else:
-            # Registration Logic
-            registration_status = True
+            registration_status = False
+        else:            
+            user = None
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                user = create_new_user(name, username, email, password)
+                if user is not None:
+                    registration_status = True
             
-            if registration_status == True:
-                result_msg = "Success"
-        
-            else:
-                result_msg = "Try again"
+        if registration_status == True:
+            result_msg = "Welcome " + user.first_name + " !!!"
+    
+        else:
+            result_msg = "Either username already exists or invalid password"
             
     else:
         result_msg = "Invalid Json Data"
