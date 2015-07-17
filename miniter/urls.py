@@ -8,5 +8,6 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^register/$', register),
+    url(r'^following/$',following),
     
 ]
