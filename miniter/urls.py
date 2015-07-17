@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
 from miniter.views.register import register
+from miniter.views.following import following
 
 urlpatterns = [
     # Examples:
