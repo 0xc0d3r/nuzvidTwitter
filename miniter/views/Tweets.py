@@ -23,12 +23,10 @@ from rest_framework.response import Response
 
 
 class Tweets_request_type(object):
-    def __init__(self, username, password):
-        self.password = password
+    def __init__(self, username):
         self.username = username
 class Tweets_request_serializer(serializers.Serializer):
     username = serializers.CharField()
-    password = serializers.CharField()
     def create(self, validated_data):
         return Tweets_request_type(**validated_data)
     
