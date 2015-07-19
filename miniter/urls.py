@@ -5,6 +5,7 @@ from miniter.views.following import following
 from miniter.views.followers import get_followers
 from miniter.views.searchProfile import search
 from miniter.views.Tweets import Tweets
+from miniter.views.FollowRecommendations import FollowRecommendations
 
 urlpatterns = [
     # Examples:
@@ -15,4 +16,5 @@ urlpatterns = [
     url(r'^followers/$',get_followers),
     url(r'^search/$',search),
     url(r'^tweets/$', Tweets),
+    url(r'^followRecommendations/$',FollowRecommendations),
 ]
