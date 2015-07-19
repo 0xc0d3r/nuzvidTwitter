@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from miniter.views.register import register
 from miniter.views.following import following
+from miniter.views.followers import get_followers
 
 urlpatterns = [
     # Examples:
@@ -9,5 +10,6 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
     url(r'^register/$', register),
     url(r'^following/$',following),
+    url(r'^followers/$',get_followers),
     
 ]
